@@ -47,6 +47,7 @@ int main(void) {
 	CLOCK_EnableClock(kCLOCK_PortB);
 	CLOCK_EnableClock(kCLOCK_PortC);
 	CLOCK_EnableClock(kCLOCK_PortD);
+	CLOCK_EnableClock(kCLOCK_PortE);
 
 	PORT_SetPinMux(PORTB, PIN21, kPORT_MuxAsGpio);
 	PORT_SetPinMux(PORTB, PIN22, kPORT_MuxAsGpio);
@@ -88,9 +89,10 @@ int main(void) {
 	NVIC_EnableIRQ(PORTA_IRQn);
 	NVIC_SetPriority(PORTA_IRQn, 2);
 
+	printf("Test 2");
+
 	while(1) {
 
-		RED_RGB();
 		L1 = GPIO_PinRead(GPIOB, PIN2);
     	L2 = GPIO_PinRead(GPIOB, PIN3);
     	L3 = GPIO_PinRead(GPIOB, PIN10);
@@ -106,11 +108,9 @@ int main(void) {
     	if(g_Button)
     	{
     		printf("g_Button: %d \n", g_Button);
-    		GREEN_RGB();
     		g_Button = false;
     	}
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-    	BLUE_RGB();
     }
     return 0;
 }
