@@ -22,6 +22,11 @@ gpio_pin_config_t led_config = {
         1,
     };
 
+gpio_pin_config_t line_config = {
+        kGPIO_DigitalOutput,
+        0,
+    };
+
 void PORTA_IRQHandler(void)
 {
 
@@ -64,10 +69,10 @@ int main(void) {
 
 	PORT_SetPinConfig(PORTA, PIN4, &sw_pin_config);
 
-	PORT_SetPinConfig(PORTB, PIN2, &sw_pin_config);
-	PORT_SetPinConfig(PORTB, PIN3, &sw_pin_config);
-	PORT_SetPinConfig(PORTB, PIN10, &sw_pin_config);
-	PORT_SetPinConfig(PORTB, PIN11, &sw_pin_config);
+	PORT_SetPinMux(PORTB, PIN2, kPORT_MuxAsGpio);
+	PORT_SetPinMux(PORTB, PIN3, kPORT_MuxAsGpio);
+	PORT_SetPinMux(PORTB, PIN10, kPORT_MuxAsGpio);
+	PORT_SetPinMux(PORTB, PIN11, kPORT_MuxAsGpio);
 
 	PORT_SetPinConfig(PORTC, PIN6, &sw_pin_config);
 
@@ -78,10 +83,10 @@ int main(void) {
 
 	GPIO_PinInit(GPIOA, PIN4, &sw_config);
 
-	GPIO_PinInit(GPIOB, PIN2, &sw_config);
-	GPIO_PinInit(GPIOB, PIN3, &sw_config);
-	GPIO_PinInit(GPIOB, PIN10, &sw_config);
-	GPIO_PinInit(GPIOB, PIN11, &sw_config);
+	GPIO_PinInit(GPIOB, PIN2, &line_config);
+	GPIO_PinInit(GPIOB, PIN3, &line_config);
+	GPIO_PinInit(GPIOB, PIN10, &line_config);
+	GPIO_PinInit(GPIOB, PIN11, &line_config);
 
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
 
