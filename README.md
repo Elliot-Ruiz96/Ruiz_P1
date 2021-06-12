@@ -1,3 +1,3 @@
 # Ruiz_T4
 
-Creacion de módulo RGB para todos los colores
+Creacion de módulo Keyboard_Matrix para lectura del keypad
