@@ -10,57 +10,6 @@ void Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4){
 	printf("C3: %d \n", C3);
 	printf("C4: %d \n", C4);
 
-	 if(L1 == 0 && C1 == 0){
-		 printf("1\n");
-	 }
-	 else if(L1 == 0 && C2 == 0){
-		 printf("2\n");
-	 }
-	 else if(L1 == 0 && C3 == 0){
-		 printf("3\n");
-	 }
-	 else if(L1 == 0 && C4 == 0){
-		 printf("A\n");
-	 }
-	 else if(L2 == 0 && C1 == 0){
-		 printf("4\n");
-	 }
-	 else if(L2 == 0 && C2 == 0){
-		 printf("5\n");
-	 }
-	 else if(L2 == 0 && C3 == 0){
-		 printf("6\n");
-	 }
-	 else if(L2 == 0 && C4 == 0){
-		 printf("B\n");
-	 }
-	 else if(L3 == 0 && C1 == 0){
-		 printf("7\n");
-	 }
-	 else if(L3 == 0 && C2 == 0){
-		 printf("8\n");
-	 }
-	 else if(L3 == 0 && C3 == 0){
-		 printf("9\n");
-	 }
-	 else if(L3 == 0 && C4 == 0){
-		 printf("C\n");
-	 }
-	 else if(L4 == 0 && C1 == 0){
-		 printf("*\n");
-	 }
-	 else if(L4 == 0 && C2 == 0){
-		 printf("0\n");
-	 }
-	 else if(L4 == 0 && C3 == 0){
-		 printf("#\n");
-	 }
-	 else if (L4 == 0 && C4 == 0){
-		 printf("D\n");
-	 }
-	 else
-	{
-		 printf("Hello World!\n");
-	}
+
 
 }
