@@ -9,7 +9,8 @@
 #define PIN4        4u
 #define PIN6        6u
 
-uint8_t g_Button = 0;
+uint8_t g_Button2 = 0;
+uint8_t g_Button3 = 0;
 
 gpio_pin_config_t sw_config = {
         kGPIO_DigitalInput,
@@ -25,7 +26,15 @@ void PORTA_IRQHandler(void)
 {
 
     GPIO_PortClearInterruptFlags(GPIOA, 1U << PIN4);
-    g_Button = true;
+    g_Button3 = true;
+    SDK_ISR_EXIT_BARRIER;
+}
+
+void PORTC_IRQHandler(void)
+{
+
+    GPIO_PortClearInterruptFlags(GPIOC, 1U << PIN6);
+    g_Button2 = true;
     SDK_ISR_EXIT_BARRIER;
 }
 
@@ -87,9 +96,11 @@ int main(void) {
 
 	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptFallingEdge);
 	NVIC_EnableIRQ(PORTA_IRQn);
-	NVIC_SetPriority(PORTA_IRQn, 2);
+	NVIC_SetPriority(PORTA_IRQn, 1);
 
-	printf("Test 2");
+	PORT_SetPinInterruptConfig(PORTC, PIN6, kPORT_InterruptFallingEdge);
+	NVIC_EnableIRQ(PORTC_IRQn);
+	NVIC_SetPriority(PORTC_IRQn, 1);
 
 	while(1) {
 
@@ -101,14 +112,18 @@ int main(void) {
     	C2 = GPIO_PinRead(GPIOD, PIN2);
     	C3 = GPIO_PinRead(GPIOD, PIN3);
     	C4 = GPIO_PinRead(GPIOD, PIN1);
-    	B1 = GPIO_PinRead(GPIOA, PIN4);
-    	B2 = GPIO_PinRead(GPIOC, PIN6);
     	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4, B1, B2);
-    	printf("g_Button: %d \n", g_Button);
-    	if(g_Button)
+    	printf("g_Button2: %d \n", g_Button2);
+    	printf("g_Button3: %d \n", g_Button3);
+    	if(g_Button2)
     	{
-    		printf("g_Button: %d \n", g_Button);
-    		g_Button = false;
+    		printf("g_Button2: %d \n", g_Button2);
+    		g_Button2 = false;
+    	}
+    	if(g_Button3)
+    	{
+    		printf("g_Button3: %d \n", g_Button3);
+    		g_Button3 = false;
     	}
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     }
