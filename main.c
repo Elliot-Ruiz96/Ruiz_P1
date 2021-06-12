@@ -4,22 +4,30 @@
 #include "fsl_common.h"
 #include "fsl_clock.h"
 #include "Keyboard_Matrix.h"
+#include "RGB.h"
 
-#define PIN0       	0u
-#define PIN1       	1u
-#define PIN2		2u
-#define PIN3		3u
-#define PIN10		10u
-#define PIN11		11u
-#define PIN6        6u
 #define PIN4        4u
-#define CORE_FREQ	21000000u
-#define DELAY		1000000u
+#define PIN6        6u
 
- gpio_pin_config_t sw_config = {
+uint8_t g_Button = 0;
+
+gpio_pin_config_t sw_config = {
         kGPIO_DigitalInput,
         0,
     };
+
+gpio_pin_config_t led_config = {
+        kGPIO_DigitalOutput,
+        0,
+    };
+
+void PORTA_IRQHandler(void)
+{
+
+    GPIO_PortClearInterruptFlags(GPIOA, 1U << PIN4);
+    g_Button = true;
+    SDK_ISR_EXIT_BARRIER;
+}
 
 int main(void) {
 
@@ -59,9 +67,16 @@ int main(void) {
 	GPIO_PinInit(GPIOD, PIN1, &sw_config);
 	GPIO_PinInit(GPIOD, PIN2, &sw_config);
 	GPIO_PinInit(GPIOD, PIN3, &sw_config);
+	GPIO_PinInit(GPIOB, PIN22, &led_config);
+	GPIO_PinInit(GPIOB, PIN21, &led_config);
+	GPIO_PinInit(GPIOE, PIN26, &led_config);
+	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptFallingEdge);
+	NVIC_EnableIRQ(PORTA_IRQn);
+	NVIC_SetPriority(PORTA_IRQn, 2);
 
 	while(1) {
 
+		RED_RGB();
 		L1 = GPIO_PinRead(GPIOB, PIN2);
     	L2 = GPIO_PinRead(GPIOB, PIN3);
     	L3 = GPIO_PinRead(GPIOB, PIN10);
@@ -72,11 +87,17 @@ int main(void) {
     	C4 = GPIO_PinRead(GPIOD, PIN1);
     	B1 = GPIO_PinRead(GPIOA, PIN4);
     	B2 = GPIO_PinRead(GPIOC, PIN6);
-
     	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4, B1, B2);
+    	printf("g_Button: %d \n", g_Button);
+    	if(g_Button)
+    	{
+    		printf("g_Button: %d \n", g_Button);
+    		GREEN_RGB();
+    		g_Button = false;
+    	}
 
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-
+    	BLUE_RGB();
     }
     return 0 ;
 }
