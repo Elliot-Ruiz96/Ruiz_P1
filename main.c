@@ -47,32 +47,43 @@ int main(void) {
 	CLOCK_EnableClock(kCLOCK_PortB);
 	CLOCK_EnableClock(kCLOCK_PortC);
 	CLOCK_EnableClock(kCLOCK_PortD);
+
 	PORT_SetPinMux(PORTB, PIN21, kPORT_MuxAsGpio);
 	PORT_SetPinMux(PORTB, PIN22, kPORT_MuxAsGpio);
 	PORT_SetPinMux(PORTE, PIN26, kPORT_MuxAsGpio);
+
 	PORT_SetPinConfig(PORTA, PIN4, &sw_pin_config);
+
 	PORT_SetPinConfig(PORTB, PIN2, &sw_pin_config);
 	PORT_SetPinConfig(PORTB, PIN3, &sw_pin_config);
 	PORT_SetPinConfig(PORTB, PIN10, &sw_pin_config);
 	PORT_SetPinConfig(PORTB, PIN11, &sw_pin_config);
+
 	PORT_SetPinConfig(PORTC, PIN6, &sw_pin_config);
+
 	PORT_SetPinConfig(PORTD, PIN0, &sw_pin_config);
 	PORT_SetPinConfig(PORTD, PIN1, &sw_pin_config);
 	PORT_SetPinConfig(PORTD, PIN2, &sw_pin_config);
 	PORT_SetPinConfig(PORTD, PIN3, &sw_pin_config);
+
 	GPIO_PinInit(GPIOA, PIN4, &sw_config);
+
 	GPIO_PinInit(GPIOB, PIN2, &sw_config);
 	GPIO_PinInit(GPIOB, PIN3, &sw_config);
 	GPIO_PinInit(GPIOB, PIN10, &sw_config);
 	GPIO_PinInit(GPIOB, PIN11, &sw_config);
+
 	GPIO_PinInit(GPIOC, PIN6, &sw_config);
+
 	GPIO_PinInit(GPIOD, PIN0, &sw_config);
 	GPIO_PinInit(GPIOD, PIN1, &sw_config);
 	GPIO_PinInit(GPIOD, PIN2, &sw_config);
 	GPIO_PinInit(GPIOD, PIN3, &sw_config);
+
 	GPIO_PinInit(GPIOB, PIN22, &led_config);
 	GPIO_PinInit(GPIOB, PIN21, &led_config);
 	GPIO_PinInit(GPIOE, PIN26, &led_config);
+
 	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptFallingEdge);
 	NVIC_EnableIRQ(PORTA_IRQn);
 	NVIC_SetPriority(PORTA_IRQn, 2);
