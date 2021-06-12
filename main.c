@@ -40,7 +40,7 @@ void PORTC_IRQHandler(void)
 
 int main(void) {
 
-	uint32_t L1, L2, L3, L4, C1, C2, C3, C4, B1, B2;
+	uint8_t L1, L2, L3, L4, C1, C2, C3, C4;
 
 	const port_pin_config_t sw_pin_config = {
 	    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
@@ -112,18 +112,17 @@ int main(void) {
     	C2 = GPIO_PinRead(GPIOD, PIN2);
     	C3 = GPIO_PinRead(GPIOD, PIN3);
     	C4 = GPIO_PinRead(GPIOD, PIN1);
-    	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4, B1, B2);
-    	printf("g_Button2: %d \n", g_Button2);
-    	printf("g_Button3: %d \n", g_Button3);
+    	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
+    	GREEN_RGB();
     	if(g_Button2)
     	{
-    		printf("g_Button2: %d \n", g_Button2);
     		g_Button2 = false;
+    		RED_RGB();
     	}
     	if(g_Button3)
     	{
-    		printf("g_Button3: %d \n", g_Button3);
     		g_Button3 = false;
+    		BLUE_RGB();
     	}
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     }
