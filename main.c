@@ -18,7 +18,7 @@ gpio_pin_config_t sw_config = {
 
 gpio_pin_config_t led_config = {
         kGPIO_DigitalOutput,
-        0,
+        1,
     };
 
 void PORTA_IRQHandler(void)
@@ -47,6 +47,9 @@ int main(void) {
 	CLOCK_EnableClock(kCLOCK_PortB);
 	CLOCK_EnableClock(kCLOCK_PortC);
 	CLOCK_EnableClock(kCLOCK_PortD);
+	PORT_SetPinMux(PORTB, PIN21, kPORT_MuxAsGpio);
+	PORT_SetPinMux(PORTB, PIN22, kPORT_MuxAsGpio);
+	PORT_SetPinMux(PORTE, PIN26, kPORT_MuxAsGpio);
 	PORT_SetPinConfig(PORTA, PIN4, &sw_pin_config);
 	PORT_SetPinConfig(PORTB, PIN2, &sw_pin_config);
 	PORT_SetPinConfig(PORTB, PIN3, &sw_pin_config);
