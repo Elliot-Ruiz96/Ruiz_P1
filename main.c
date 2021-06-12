@@ -109,9 +109,8 @@ int main(void) {
     		GREEN_RGB();
     		g_Button = false;
     	}
-
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     	BLUE_RGB();
     }
-    return 0 ;
+    return 0;
 }
