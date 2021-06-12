@@ -1,7 +1,6 @@
 #include "Keyboard_Matrix.h"
 
 void Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4, B1, B2){
-	printf("Test\n");
 	printf("L1: %d \n", L1);
 	printf("L2: %d \n", L2);
 	printf("L3: %d \n", L3);
