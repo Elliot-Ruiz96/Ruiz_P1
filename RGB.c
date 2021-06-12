@@ -2,33 +2,39 @@
 
 void RED_RGB(){
 	OFF_RGB();
+	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 	GPIO_PortSet(GPIOB, 1u << PIN22);					// RED
 }
 
 void GREEN_RGB(){
 	OFF_RGB();
+	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 	GPIO_PortSet(GPIOE, 1u << PIN26);					// GREEN
 }
 
 void BLUE_RGB(){
 	OFF_RGB();
+	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 	GPIO_PortSet(GPIOB, 1u << PIN21);					// BLUE
 }
 
 void PURPLE_RGB(){
 	OFF_RGB();
+	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 	GPIO_PortSet(GPIOB, 1u << PIN21);					// PURPLE
 	GPIO_PortSet(GPIOB, 1u << PIN22);
 }
 
 void YELLOW_RGB(){
 	OFF_RGB();
+	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 	GPIO_PortSet(GPIOB, 1u << PIN22);					// YELLOW
 	GPIO_PortSet(GPIOE, 1u << PIN26);
 }
 
 void LIGHTBLUE_RGB(){
 	OFF_RGB();
+	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 	GPIO_PortSet(GPIOE, 1u << PIN26);
 	GPIO_PortSet(GPIOB, 1u << PIN21);					// LIGHT BLUE
 
@@ -36,6 +42,7 @@ void LIGHTBLUE_RGB(){
 
 void WHITE_RGB(){
 	OFF_RGB();
+	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
 	GPIO_PortSet(GPIOB, 1u << PIN21);					// WHITE
 	GPIO_PortSet(GPIOB, 1u << PIN22);
 	GPIO_PortSet(GPIOE, 1u << PIN26);
