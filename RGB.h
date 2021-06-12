@@ -16,5 +16,4 @@ void LIGHTBLUE_RGB();
 void WHITE_RGB();
 void OFF_RGB();
 
-
 #endif /* RGB_H_ */
