@@ -14,7 +14,7 @@ void Read_KeyPad(){
 	C4 = GPIO_PinRead(GPIOD, PIN1);
 
 	//if(PIT_Flag_get_PIT() == true){
-		L1 = 0;
+		GPIO_PortSet(GPIOB, 1u << PIN3);
 		flag1 = true;
 		while(flag1 == true){
 			if(C1 == 0){
