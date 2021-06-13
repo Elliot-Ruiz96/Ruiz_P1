@@ -128,10 +128,6 @@ int main(void) {
 
 	while(1) {
 
-		printf("State: %d\n", current_state);
-		printf("Button2: %d\n", g_Button2);
-		printf("Button3: %d\n", g_Button3);
-
 		if(PIT_Flag_get_PIT() == true){
 			switch(current_state){
 				case START:
