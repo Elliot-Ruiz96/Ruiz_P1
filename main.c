@@ -5,6 +5,7 @@
 #include "fsl_clock.h"
 #include "Keyboard_Matrix.h"
 #include "RGB.h"
+#include "PIT.h"
 
 #define PIN4        4u
 #define PIN6        6u
