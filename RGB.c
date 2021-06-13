@@ -28,7 +28,7 @@ void BLUE_RGB(){
 void PURPLE_RGB(){
 	if(PIT_Flag_get_PIT() == true){
 		OFF_RGB();
-		GPIO_PortClear(GPIOB, 1u << PIN21);					// PURPLE
+		GPIO_PortClear(GPIOB, 1u << PIN21);					// PURPLE https://www.youtube.com/watch?v=cRKoZbVuX6E&ab_channel=BONOTV
 		GPIO_PortClear(GPIOB, 1u << PIN22);
 		PIT_Flag_Set_PIT();
 	}
