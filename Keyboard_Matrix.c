@@ -13,7 +13,7 @@ void Read_KeyPad(){
 	C3 = GPIO_PinRead(GPIOD, PIN3);
 	C4 = GPIO_PinRead(GPIOD, PIN1);
 
-	if(PIT_Flag_get_PIT() == true){
+	//if(PIT_Flag_get_PIT() == true){
 		GPIO_PortSet(GPIOB, 1u << PIN2);
 		flag1 = true;
 		while(flag1 == true){
@@ -39,16 +39,16 @@ void Read_KeyPad(){
 				flag1 = false;
 			}
 		}
-		PIT_Flag_Set_PIT();
+		//PIT_Flag_Set_PIT();
 		GPIO_PortClear(GPIOB, 1u << PIN2);
 		printf("L1: %d",L1);
 		printf("C1: %d",C1);
 		printf("C2: %d",C2);
 		printf("C3: %d",C3);
 		printf("C4: %d",C4);
-	}
+	//}
 
-	if(PIT_Flag_get_PIT() == true){
+		//if(PIT_Flag_get_PIT() == true){
 		GPIO_PortSet(GPIOB, 1u << PIN3);
 		flag1 = true;
 		while(flag1 == true){
@@ -74,16 +74,16 @@ void Read_KeyPad(){
 				flag1 = false;
 			}
 		}
-		PIT_Flag_Set_PIT();
+		//PIT_Flag_Set_PIT();
 		GPIO_PortClear(GPIOB, 1u << PIN3);
 		printf("L2: %d",L2);
 		printf("C1: %d",C1);
 		printf("C2: %d",C2);
 		printf("C3: %d",C3);
 		printf("C4: %d",C4);
-	}
+		//}
 
-	if(PIT_Flag_get_PIT() == true){
+		//if(PIT_Flag_get_PIT() == true){
 		GPIO_PortSet(GPIOB, 1u << PIN10);
 		flag1 = true;
 		while(flag1 == true){
@@ -109,16 +109,16 @@ void Read_KeyPad(){
 				flag1 = false;
 			}
 		}
-		PIT_Flag_Set_PIT();
+		//PIT_Flag_Set_PIT();
 		GPIO_PortClear(GPIOB, 1u << PIN10);
 		printf("L3: %d",L3);
 		printf("C1: %d",C1);
 		printf("C2: %d",C2);
 		printf("C3: %d",C3);
 		printf("C4: %d",C4);
-	}
+		//}
 
-	if(PIT_Flag_get_PIT() == true){
+		//if(PIT_Flag_get_PIT() == true){
 		GPIO_PortSet(GPIOB, 1u << PIN11);
 		flag1 = true;
 		while(flag1 == true){
@@ -144,12 +144,12 @@ void Read_KeyPad(){
 				flag1 = false;
 			}
 		}
-		PIT_Flag_Set_PIT();
+		//PIT_Flag_Set_PIT();
 		GPIO_PortClear(GPIOB, 1u << PIN11);
 		printf("L4: %d",L4);
 		printf("C1: %d",C1);
 		printf("C2: %d",C2);
 		printf("C3: %d",C3);
 		printf("C4: %d",C4);
-	}
+		//}
 }
