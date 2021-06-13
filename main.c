@@ -44,14 +44,22 @@ void PORTC_IRQHandler(void){
 }
 
 void PORTD_IRQHandler(void){
-    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN0);
-    g_Column1 = true;
-    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN2);
-    g_Column2 = true;
-    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN3);
-    g_Column3 = true;
-    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN1);
-    g_Column4 = true;
+	if(GPIO_PinRead(GPIOD, PIN0) == true){
+	    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN0);
+	    g_Column1 = true;
+	}
+	if(GPIO_PinRead(GPIOD, PIN2) == true){
+	    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN2);
+	    g_Column2 = true;
+	}
+	if(GPIO_PinRead(GPIOD, PIN3) == true){
+	    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN3);
+	    g_Column3 = true;
+	}
+	if(GPIO_PinRead(GPIOD, PIN1) == true){
+	    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN1);
+	    g_Column4 = true;
+	}
     SDK_ISR_EXIT_BARRIER;
 }
 
