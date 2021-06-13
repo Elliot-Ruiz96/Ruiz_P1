@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "clock_config.h"
 #include "pin_mux.h"
 #include "fsl_port.h"
 #include "fsl_common.h"
@@ -70,6 +71,23 @@ int main(void) {
 	    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
 	  };
 
+	pit_config_t pitConfig;
+	uint32_t FREQ = 0;
+
+	printf("Test 1");
+
+	PIT_GetDefaultConfig(&pitConfig);
+	PIT_Init(PIT, &pitConfig);
+	printf("Test 2");
+	FREQ = CLOCK_GetFreq(kCLOCK_BusClk);
+	PIT_SetTimerPeriod(PIT, kPIT_Chnl_0, USEC_TO_COUNT(1000000U, FREQ));
+	printf("Test 3");
+	PIT_EnableInterrupts(PIT, kPIT_Chnl_0, kPIT_TimerInterruptEnable);
+	EnableIRQ(PIT0_IRQn);
+	PIT_StartTimer(PIT, kPIT_Chnl_0);
+
+	printf("Test 4");
+
 	CLOCK_EnableClock(kCLOCK_PortA);
 	CLOCK_EnableClock(kCLOCK_PortB);
 	CLOCK_EnableClock(kCLOCK_PortC);
@@ -135,7 +153,6 @@ int main(void) {
 	PORT_SetPinInterruptConfig(PORTD, PIN1, kPORT_InterruptFallingEdge);
 	NVIC_EnableIRQ(PORTD_IRQn);
 	NVIC_SetPriority(PORTD_IRQn, 2);
-
 
 	while(1) {
 
