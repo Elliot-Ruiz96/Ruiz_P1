@@ -1,7 +1,9 @@
 #ifndef KEYBOARD_MATRIX_H_
 #define KEYBOARD_MATRIX_H_
 
+#include <stdio.h>
 #include "fsl_gpio.h"
+#include "PIT.h"
 
 #define PIN0       	0u
 #define PIN1       	1u
