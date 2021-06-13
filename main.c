@@ -4,6 +4,7 @@
 #include "fsl_port.h"
 #include "fsl_common.h"
 #include "fsl_clock.h"
+#include "fsl_dac.h"
 #include "Keyboard_Matrix.h"
 #include "RGB.h"
 #include "PIT.h"
