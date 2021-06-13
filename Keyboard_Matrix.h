@@ -5,6 +5,14 @@
 #include "fsl_gpio.h"
 #include "PIT.h"
 
+typedef enum {
+	FIRST,
+	SECOND,
+	THIRD,
+	FOURTH,
+
+}State_name_t1;
+
 #define PIN0       	0u
 #define PIN1       	1u
 #define PIN2		2u
