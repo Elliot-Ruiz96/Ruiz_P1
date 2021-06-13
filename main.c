@@ -43,24 +43,13 @@ void PORTC_IRQHandler(void){
     SDK_ISR_EXIT_BARRIER;
 }
 
-void PORTC1_IRQHandler(void){
+void PORTD_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN0);
     g_Column1 = true;
-    SDK_ISR_EXIT_BARRIER;
-}
-
-void PORTC2_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN2);
     g_Column2 = true;
-    SDK_ISR_EXIT_BARRIER;
-}
-
-void PORTC3_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN3);
     g_Column3 = true;
-    SDK_ISR_EXIT_BARRIER;
-}
-void PORTC4_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN1);
     g_Column4 = true;
     SDK_ISR_EXIT_BARRIER;
