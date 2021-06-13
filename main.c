@@ -135,14 +135,24 @@ int main(void) {
     	C4 = GPIO_PinRead(GPIOD, PIN1);
     	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
     	if(g_Button2){
+    		current_state = PERIOD;
     		g_Button2 = false;
     	}
     	if(g_Button3){
+    		current_state = AMPLITUDE;
     		g_Button3 = false;
     	}
     	switch(current_state){
     	case START:
     		RED_RGB();
+    		break;
+    	case PERIOD:
+    		RED_RGB();
+    		break;
+    	case AMPLITUDE:
+    		GREEN_RGB();
+    		break;
+    	default:
     		break;
     	}
 
