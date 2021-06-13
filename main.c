@@ -63,7 +63,7 @@ int main(void) {
 	    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
 	  };
 
-	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4, flag;
+	uint8_t flag;
 	pit_config_t pitConfig;
 	uint32_t FREQ = 0;
 
@@ -129,23 +129,9 @@ int main(void) {
 	while(1) {
 
 		if(PIT_Flag_get_PIT() == true){
-			L1 = GPIO_PinRead(GPIOB, PIN2);
-			L2 = GPIO_PinRead(GPIOB, PIN3);
-			L3 = GPIO_PinRead(GPIOB, PIN10);
-			L4 = GPIO_PinRead(GPIOB, PIN11);
-			C1 = GPIO_PinRead(GPIOD, PIN0);
-			C2 = GPIO_PinRead(GPIOD, PIN2);
-			C3 = GPIO_PinRead(GPIOD, PIN3);
-			C4 = GPIO_PinRead(GPIOD, PIN1);
-			Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
-
-			printf("State: %d\n", current_state);
-
 			switch(current_state){
 				case START:
 					RED_RGB();
-					printf("Button2(S): %d\n", g_Button2);
-					printf("Button3(S): %d\n", g_Button3);
 					if(g_Button2){
 						current_state = PERIOD;
 					}
@@ -158,9 +144,8 @@ int main(void) {
 					flag = true;
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
+							Read_KeyPad();
 							GREEN_RGB();
-							printf("Button2(P): %d\n", g_Button2);
-							printf("Button3(P): %d\n", g_Button3);
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
@@ -174,9 +159,8 @@ int main(void) {
 					flag = true;
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
+							Read_KeyPad();
 							BLUE_RGB();
-							printf("Button2(A): %d\n", g_Button2);
-							printf("Button3(A): %d\n", g_Button3);
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
@@ -192,8 +176,6 @@ int main(void) {
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
 							PURPLE_RGB();
-							printf("Button2(E): %d\n", g_Button2);
-							printf("Button3(E): %d\n", g_Button3);
 							if(g_Button2 == 1){
 								current_state = PERIOD;
 								flag = false;
