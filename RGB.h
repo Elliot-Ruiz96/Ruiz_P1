@@ -7,7 +7,7 @@
 #define PIN21       21u
 #define PIN26		26u
 
-#define CORE_FREQ	21000000u
+#define CORE_FREQ	10000000u
 #define DELAY		1000000u
 
 void RED_RGB();
