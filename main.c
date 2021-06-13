@@ -144,8 +144,8 @@ int main(void) {
 					flag = true;
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
-							Read_KeyPad();
 							GREEN_RGB();
+							Read_KeyPad();
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
@@ -159,8 +159,8 @@ int main(void) {
 					flag = true;
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
-							Read_KeyPad();
 							BLUE_RGB();
+							Read_KeyPad();
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
