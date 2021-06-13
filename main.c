@@ -20,6 +20,7 @@ typedef enum {
 	START,
 	PERIOD,
 	AMPLITUDE,
+	EDIT,
 
 }State_name_t;
 
@@ -45,13 +46,13 @@ gpio_pin_config_t line_config = {
 
 void PORTA_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOA, 1U << PIN4);
-    g_Button3 = true;
+    g_Button2 = true;
     SDK_ISR_EXIT_BARRIER;
 }
 
 void PORTC_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOC, 1U << PIN6);
-    g_Button2 = true;
+    g_Button3 = true;
     SDK_ISR_EXIT_BARRIER;
 }
 
@@ -67,7 +68,7 @@ int main(void) {
 	    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
 	  };
 
-	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4;
+	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4, flag;
 	pit_config_t pitConfig;
 	uint32_t FREQ = 0;
 
@@ -124,6 +125,9 @@ int main(void) {
 	PORT_SetPinInterruptConfig(PORTC, PIN6, kPORT_InterruptFallingEdge);
 	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptFallingEdge);
 
+	PORT_SetPinInterruptConfig(PORTC, PIN6, kPORT_InterruptRisingEdge);
+	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptRisingEdge);
+
 	NVIC_EnableIRQ(PORTC_IRQn);
 	NVIC_SetPriority(PORTC_IRQn, 1);
 
@@ -142,21 +146,63 @@ int main(void) {
     	C4 = GPIO_PinRead(GPIOD, PIN1);
     	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
     	printf("State: %d\n", current_state);
-    	if(g_Button2){
-    		current_state = PERIOD;
-    	}
-    	if(g_Button3){
-    		current_state = AMPLITUDE;
-    	}
     	switch(current_state){
     	case START:
     		RED_RGB();
+        	printf("Button2(S): %d\n", g_Button2);
+        	printf("Button3(S): %d\n", g_Button3);
+    		if(g_Button2){
+    			current_state = PERIOD;
+    		}
+    		if(g_Button3){
+    			current_state = AMPLITUDE;
+    		}
     		break;
     	case PERIOD:
-    		GREEN_RGB();
+    		g_Button2 = false;
+    		flag = true;
+    		while(flag == true){
+            	GREEN_RGB();
+                printf("Button2(P): %d\n", g_Button2);
+                printf("Button3(P): %d\n", g_Button3);
+            	if(g_Button2 == 1){
+            		current_state = EDIT;
+            		flag = false;
+            	}
+            	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		}
+
     		break;
     	case AMPLITUDE:
-    		BLUE_RGB();
+    		g_Button2 = false;
+    		flag = true;
+    		while(flag == true){
+        		BLUE_RGB();
+            	printf("Button2(A): %d\n", g_Button2);
+            	printf("Button3(A): %d\n", g_Button3);
+        		if(g_Button2 == 1){
+        			current_state = EDIT;
+        			flag = false;
+        		}
+            	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		}
+    		break;
+    	case EDIT:
+    		g_Button2 = false;
+    		g_Button3 = false;
+    		flag = true;
+    		while(flag == true){
+        		PURPLE_RGB();
+            	printf("Button2(E): %d\n", g_Button2);
+            	printf("Button3(E): %d\n", g_Button3);
+        		if(g_Button2 == 1){
+        			current_state = PERIOD;
+        		}
+        		if(g_Button3 == 1){
+        			current_state = AMPLITUDE;
+        		}
+        		SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
+    		}
     		break;
     	default:
     		break;
