@@ -2,6 +2,7 @@
 #define RGB_H_
 
 #include "fsl_gpio.h"
+#include "PIT.h"
 
 #define PIN22       22u
 #define PIN21       21u
