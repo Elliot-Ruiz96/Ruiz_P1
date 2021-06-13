@@ -1,51 +1,66 @@
 #include "RGB.h"
 
 void RED_RGB(){
-	OFF_RGB();
-	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-	GPIO_PortSet(GPIOB, 1u << PIN22);					// RED
+	if(PIT_Flag_get_PIT() == true){
+		OFF_RGB();
+		GPIO_PortSet(GPIOB, 1u << PIN22);					// RED
+		PIT_Flag_Set_PIT();
+	}
+
 }
 
 void GREEN_RGB(){
-	OFF_RGB();
-	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-	GPIO_PortSet(GPIOE, 1u << PIN26);					// GREEN
+	if(PIT_Flag_get_PIT() == true){
+		OFF_RGB();
+		GPIO_PortSet(GPIOE, 1u << PIN26);					// GREEN
+		PIT_Flag_Set_PIT();
+	}
 }
 
 void BLUE_RGB(){
-	OFF_RGB();
-	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-	GPIO_PortSet(GPIOB, 1u << PIN21);					// BLUE
+	if(PIT_Flag_get_PIT() == true){
+		OFF_RGB();
+		GPIO_PortSet(GPIOB, 1u << PIN21);					// BLUE
+		PIT_Flag_Set_PIT();
+	}
 }
 
 void PURPLE_RGB(){
-	OFF_RGB();
-	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-	GPIO_PortSet(GPIOB, 1u << PIN21);					// PURPLE
-	GPIO_PortSet(GPIOB, 1u << PIN22);
+	if(PIT_Flag_get_PIT() == true){
+		OFF_RGB();
+		GPIO_PortSet(GPIOB, 1u << PIN21);					// PURPLE
+		GPIO_PortSet(GPIOB, 1u << PIN22);
+		PIT_Flag_Set_PIT();
+	}
 }
 
 void YELLOW_RGB(){
-	OFF_RGB();
-	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-	GPIO_PortSet(GPIOB, 1u << PIN22);					// YELLOW
-	GPIO_PortSet(GPIOE, 1u << PIN26);
+	if(PIT_Flag_get_PIT() == true){
+		OFF_RGB();
+		GPIO_PortSet(GPIOB, 1u << PIN22);					// YELLOW
+		GPIO_PortSet(GPIOE, 1u << PIN26);
+		PIT_Flag_Set_PIT();
+	}
 }
 
 void LIGHTBLUE_RGB(){
-	OFF_RGB();
-	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-	GPIO_PortSet(GPIOE, 1u << PIN26);
-	GPIO_PortSet(GPIOB, 1u << PIN21);					// LIGHT BLUE
+	if(PIT_Flag_get_PIT() == true){
+		OFF_RGB();
+		GPIO_PortSet(GPIOE, 1u << PIN26);
+		GPIO_PortSet(GPIOB, 1u << PIN21);					// LIGHT BLUE
+		PIT_Flag_Set_PIT();
+	}
 
 }
 
 void WHITE_RGB(){
-	OFF_RGB();
-	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
-	GPIO_PortSet(GPIOB, 1u << PIN21);					// WHITE
-	GPIO_PortSet(GPIOB, 1u << PIN22);
-	GPIO_PortSet(GPIOE, 1u << PIN26);
+	if(PIT_Flag_get_PIT() == true){
+		OFF_RGB();
+		GPIO_PortSet(GPIOB, 1u << PIN21);					// WHITE
+		GPIO_PortSet(GPIOB, 1u << PIN22);
+		GPIO_PortSet(GPIOE, 1u << PIN26);
+		PIT_Flag_Set_PIT();
+	}
 }
 
 void OFF_RGB(){
