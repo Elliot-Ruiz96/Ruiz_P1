@@ -197,9 +197,11 @@ int main(void) {
             	printf("Button3(E): %d\n", g_Button3);
         		if(g_Button2 == 1){
         			current_state = PERIOD;
+        			flag = false;
         		}
         		if(g_Button3 == 1){
         			current_state = AMPLITUDE;
+        			flag = false;
         		}
         		SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     		}
