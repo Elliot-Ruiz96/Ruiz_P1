@@ -14,7 +14,7 @@ void Read_KeyPad(){
 	C4 = GPIO_PinRead(GPIOD, PIN1);
 
 	//if(PIT_Flag_get_PIT() == true){
-		GPIO_PortSet(GPIOB, 1u << PIN2);
+		L1 = 0;
 		flag1 = true;
 		while(flag1 == true){
 			if(C1 == 0){
@@ -70,19 +70,19 @@ void Read_KeyPad(){
 		flag1 = true;
 		while(flag1 == true){
 			if(C1 == 0){
-				printf("4\n");
+				printf("7\n");
 				flag1 = false;
 			}
 			else if (C2 == 0){
-				printf("5\n");
+				printf("8\n");
 				flag1 = false;
 			}
 			else if (C3 == 0){
-				printf("6\n");
+				printf("9\n");
 				flag1 = false;
 			}
 			else if (C4 == 0){
-				printf("B\n");
+				printf("C\n");
 				flag1 = false;
 			}
 			flag1 = false;
@@ -96,19 +96,19 @@ void Read_KeyPad(){
 		flag1 = true;
 		while(flag1 == true){
 			if(C1 == 0){
-				printf("4\n");
+				printf("*\n");
 				flag1 = false;
 			}
 			else if (C2 == 0){
-				printf("5\n");
+				printf("0\n");
 				flag1 = false;
 			}
 			else if (C3 == 0){
-				printf("6\n");
+				printf("#\n");
 				flag1 = false;
 			}
 			else if (C4 == 0){
-				printf("B\n");
+				printf("D\n");
 				flag1 = false;
 			}
 			flag1 = false;
