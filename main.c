@@ -11,6 +11,20 @@
 #define PIN4        4u
 #define PIN6        6u
 
+#define	ONE			(0x01u)
+#define	TWO			(0x02u)
+#define	THREE		(0x03u)
+#define ZERO		(0x00u)
+
+typedef enum {
+	START,
+	PERIOD,
+	AMPLITUDE,
+
+}State_name_t;
+
+State_name_t current_state = START;
+
 uint8_t g_Button2 = 0;
 uint8_t g_Button3 = 0;
 
@@ -125,6 +139,11 @@ int main(void) {
     	}
     	if(g_Button3){
     		g_Button3 = false;
+    	}
+    	switch(current_state){
+    	case START:
+    		RED_RGB();
+    		break;
     	}
 
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
