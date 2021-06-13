@@ -125,9 +125,6 @@ int main(void) {
 	PORT_SetPinInterruptConfig(PORTC, PIN6, kPORT_InterruptFallingEdge);
 	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptFallingEdge);
 
-	PORT_SetPinInterruptConfig(PORTC, PIN6, kPORT_InterruptRisingEdge);
-	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptRisingEdge);
-
 	NVIC_EnableIRQ(PORTC_IRQn);
 	NVIC_SetPriority(PORTC_IRQn, 1);
 
