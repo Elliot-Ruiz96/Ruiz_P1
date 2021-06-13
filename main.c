@@ -130,89 +130,87 @@ int main(void) {
 
 		if(PIT_Flag_get_PIT() == true){
 			L1 = GPIO_PinRead(GPIOB, PIN2);
-			    	L2 = GPIO_PinRead(GPIOB, PIN3);
-			    	L3 = GPIO_PinRead(GPIOB, PIN10);
-			    	L4 = GPIO_PinRead(GPIOB, PIN11);
-			    	C1 = GPIO_PinRead(GPIOD, PIN0);
-			    	C2 = GPIO_PinRead(GPIOD, PIN2);
-			    	C3 = GPIO_PinRead(GPIOD, PIN3);
-			    	C4 = GPIO_PinRead(GPIOD, PIN1);
-			    	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
+			L2 = GPIO_PinRead(GPIOB, PIN3);
+			L3 = GPIO_PinRead(GPIOB, PIN10);
+			L4 = GPIO_PinRead(GPIOB, PIN11);
+			C1 = GPIO_PinRead(GPIOD, PIN0);
+			C2 = GPIO_PinRead(GPIOD, PIN2);
+			C3 = GPIO_PinRead(GPIOD, PIN3);
+			C4 = GPIO_PinRead(GPIOD, PIN1);
+			Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
 
-			    	printf("State: %d\n", current_state);
+			printf("State: %d\n", current_state);
 
-			    	switch(current_state){
-			    	case START:
-			    		RED_RGB();
-			        	printf("Button2(S): %d\n", g_Button2);
-			        	printf("Button3(S): %d\n", g_Button3);
-			    		if(g_Button2){
-			    			current_state = PERIOD;
-			    		}
-			    		if(g_Button3){
-			    			current_state = AMPLITUDE;
-			    		}
-			    		break;
-			    	case PERIOD:
-			    		g_Button2 = false;
-			    		flag = true;
-			    		while(flag == true){
-			    			if(PIT_Flag_get_PIT() == true){
-				            	GREEN_RGB();
-				                printf("Button2(P): %d\n", g_Button2);
-				                printf("Button3(P): %d\n", g_Button3);
-				            	if(g_Button2 == 1){
-				            		current_state = EDIT;
-				            		flag = false;
-				            	}
-			    				PIT_Flag_Set_PIT();
-			    			}
-			    		}
-
-			    		break;
-			    	case AMPLITUDE:
-			    		g_Button2 = false;
-			    		flag = true;
-			    		while(flag == true){
-			    			if(PIT_Flag_get_PIT() == true){
-				        		BLUE_RGB();
-				            	printf("Button2(A): %d\n", g_Button2);
-				            	printf("Button3(A): %d\n", g_Button3);
-				        		if(g_Button2 == 1){
-				        			current_state = EDIT;
-				        			flag = false;
-				        		}
-			    				PIT_Flag_Set_PIT();
-			    			}
-			    		}
-			    		break;
-			    	case EDIT:
-			    		g_Button2 = false;
-			    		g_Button3 = false;
-			    		flag = true;
-			    		while(flag == true){
-			    			if(PIT_Flag_get_PIT() == true){
-				        		PURPLE_RGB();
-				            	printf("Button2(E): %d\n", g_Button2);
-				            	printf("Button3(E): %d\n", g_Button3);
-				        		if(g_Button2 == 1){
-				        			current_state = PERIOD;
-				        			flag = false;
-				        		}
-				        		if(g_Button3 == 1){
-				        			current_state = AMPLITUDE;
-				        			flag = false;
-				        		}
-			    				PIT_Flag_Set_PIT();
-			    			}
-			    		}
-			    		break;
-			    	default:
-			    		break;
-			    	}
+			switch(current_state){
+				case START:
+					RED_RGB();
+					printf("Button2(S): %d\n", g_Button2);
+					printf("Button3(S): %d\n", g_Button3);
+					if(g_Button2){
+						current_state = PERIOD;
+					}
+					if(g_Button3){
+						current_state = AMPLITUDE;
+					}
+					break;
+				case PERIOD:
+					g_Button2 = false;
+					flag = true;
+					while(flag == true){
+						if(PIT_Flag_get_PIT() == true){
+							GREEN_RGB();
+							printf("Button2(P): %d\n", g_Button2);
+							printf("Button3(P): %d\n", g_Button3);
+							if(g_Button2 == 1){
+								current_state = EDIT;
+								flag = false;
+							}
+							PIT_Flag_Set_PIT();
+						}
+					}
+					break;
+				case AMPLITUDE:
+					g_Button2 = false;
+					flag = true;
+					while(flag == true){
+						if(PIT_Flag_get_PIT() == true){
+							BLUE_RGB();
+							printf("Button2(A): %d\n", g_Button2);
+							printf("Button3(A): %d\n", g_Button3);
+							if(g_Button2 == 1){
+								current_state = EDIT;
+								flag = false;
+							}
+							PIT_Flag_Set_PIT();
+						}
+					}
+					break;
+				case EDIT:
+					g_Button2 = false;
+					g_Button3 = false;
+					flag = true;
+					while(flag == true){
+						if(PIT_Flag_get_PIT() == true){
+							PURPLE_RGB();
+							printf("Button2(E): %d\n", g_Button2);
+							printf("Button3(E): %d\n", g_Button3);
+							if(g_Button2 == 1){
+								current_state = PERIOD;
+								flag = false;
+							}
+							if(g_Button3 == 1){
+								current_state = AMPLITUDE;
+								flag = false;
+							}
+							PIT_Flag_Set_PIT();
+						}
+					}
+					break;
+				default:
+					break;
+			}
 			PIT_Flag_Set_PIT();
 		}
-
     }
     return 0;
 }
