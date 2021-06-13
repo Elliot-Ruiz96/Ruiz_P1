@@ -4,6 +4,8 @@ void Read_KeyPad(){
 
 	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4, flag1, flag2 = true;
 
+	State_name_t1 current_line = FIRST;
+
 	L1 = GPIO_PinRead(GPIOB, PIN2);
 	L2 = GPIO_PinRead(GPIOB, PIN3);
 	L3 = GPIO_PinRead(GPIOB, PIN10);
@@ -13,35 +15,42 @@ void Read_KeyPad(){
 	C3 = GPIO_PinRead(GPIOD, PIN3);
 	C4 = GPIO_PinRead(GPIOD, PIN1);
 
-	if(flag2 == true){
-		GPIO_PortSet(GPIOB, 1u << PIN2);
-		flag1 = true;
-		while(flag1 == true){
-			if(C1 == 0){
-				printf("1\n");
-				flag1 = false;
+	switch(current_line){
+	case FIRST:
+		if(flag2 == true){
+				GPIO_PortSet(GPIOB, 1u << PIN2);
+				flag1 = true;
+				while(flag1 == true){
+					if(C1 == 0){
+						printf("1\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					else if (C2 == 0){
+						printf("2\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					else if (C3 == 0){
+						printf("3\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					else if (C4 == 0){
+						printf("A\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					flag1 = false;
+					if(flag1 == false && flag2 == true){
+						current_line = SECOND;
+					}
+				}
 				flag2 = false;
+				GPIO_PortClear(GPIOB, 1u << PIN2);
 			}
-			else if (C2 == 0){
-				printf("2\n");
-				flag1 = false;
-				flag2 = false;
-			}
-			else if (C3 == 0){
-				printf("3\n");
-				flag1 = false;
-				flag2 = false;
-			}
-			else if (C4 == 0){
-				printf("A\n");
-				flag1 = false;
-				flag2 = false;
-			}
-			flag1 = false;
-		}
-		GPIO_PortClear(GPIOB, 1u << PIN2);
-	}
-
+		break;
+	case SECOND:
 		if(flag2 == true){
 		GPIO_PortSet(GPIOB, 1u << PIN3);
 		flag1 = true;
@@ -67,11 +76,15 @@ void Read_KeyPad(){
 				flag2 = false;
 			}
 			flag1 = false;
+			if(flag1 == false && flag2 == true){
+				current_line = THIRD;
+			}
 		}
 		flag2 = false;
 		GPIO_PortClear(GPIOB, 1u << PIN3);
 		}
-
+		break;
+	case THIRD:
 		if(flag2 == true){
 		GPIO_PortSet(GPIOB, 1u << PIN10);
 		flag1 = true;
@@ -97,38 +110,47 @@ void Read_KeyPad(){
 				flag2 = false;
 			}
 			flag1 = false;
+			if(flag1 == false && flag2 == true){
+				current_line = FOURTH;
+			}
 		}
 		flag2 = false;
 		GPIO_PortClear(GPIOB, 1u << PIN10);
 		}
-
+		break;
+	case FOURTH:
 		if(flag2 == true){
-		GPIO_PortSet(GPIOB, 1u << PIN11);
-		flag1 = true;
-		while(flag1 == true){
-			if(C1 == 0){
-				printf("*\n");
-				flag1 = false;
+				GPIO_PortSet(GPIOB, 1u << PIN11);
+				flag1 = true;
+				while(flag1 == true){
+					if(C1 == 0){
+						printf("*\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					else if (C2 == 0){
+						printf("0\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					else if (C3 == 0){
+						printf("#\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					else if (C4 == 0){
+						printf("D\n");
+						flag1 = false;
+						flag2 = false;
+					}
+					flag1 = false;
+					if(flag1 == false && flag2 == true){
+						current_line = FIRST;
+					}
+				}
 				flag2 = false;
-			}
-			else if (C2 == 0){
-				printf("0\n");
-				flag1 = false;
-				flag2 = false;
-			}
-			else if (C3 == 0){
-				printf("#\n");
-				flag1 = false;
-				flag2 = false;
-			}
-			else if (C4 == 0){
-				printf("D\n");
-				flag1 = false;
-				flag2 = false;
-			}
-			flag1 = false;
-		}
-		flag2 = false;
-		GPIO_PortClear(GPIOB, 1u << PIN11);;
-		}
+				GPIO_PortClear(GPIOB, 1u << PIN11);;
+				}
+		break;
+	}
 }
