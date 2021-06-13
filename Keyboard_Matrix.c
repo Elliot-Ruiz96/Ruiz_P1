@@ -1,8 +1,20 @@
 #include "Keyboard_Matrix.h"
 
-void Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4){
+void Read_KeyPad(){
+
+	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4;
+
+	L1 = GPIO_PinRead(GPIOB, PIN2);
+	L2 = GPIO_PinRead(GPIOB, PIN3);
+	L3 = GPIO_PinRead(GPIOB, PIN10);
+	L4 = GPIO_PinRead(GPIOB, PIN11);
+	C1 = GPIO_PinRead(GPIOD, PIN0);
+	C2 = GPIO_PinRead(GPIOD, PIN2);
+	C3 = GPIO_PinRead(GPIOD, PIN3);
+	C4 = GPIO_PinRead(GPIOD, PIN1);
 
 	GPIO_PortSet(GPIOB, 1u << PIN2);
+
 	if(C1 == 0){
 		printf("1\n");
 	}
