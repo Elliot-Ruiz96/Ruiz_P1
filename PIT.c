@@ -1,5 +1,7 @@
 #include "PIT.h"
 
+volatile bool pitIsrFlag = false;
+
 uint8_t PIT_Flag_get_PIT(void){
 	return (pitIsrFlag);
 }
