@@ -57,8 +57,6 @@ void PORTC_IRQHandler(void){
 
 int main(void) {
 
-	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4;
-
 	const port_pin_config_t sw_pin_config = {
 	    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
 	    kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
@@ -69,6 +67,7 @@ int main(void) {
 	    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
 	  };
 
+	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4;
 	pit_config_t pitConfig;
 	uint32_t FREQ = 0;
 
@@ -79,7 +78,6 @@ int main(void) {
 	PIT_EnableInterrupts(PIT, kPIT_Chnl_0, kPIT_TimerInterruptEnable);
 	EnableIRQ(PIT0_IRQn);
 	PIT_StartTimer(PIT, kPIT_Chnl_0);
-
 
 	CLOCK_EnableClock(kCLOCK_PortA);
 	CLOCK_EnableClock(kCLOCK_PortB);
@@ -123,6 +121,15 @@ int main(void) {
 	GPIO_PinInit(GPIOB, PIN21, &led_config);
 	GPIO_PinInit(GPIOE, PIN26, &led_config);
 
+	PORT_SetPinInterruptConfig(PORTC, PIN6, kPORT_InterruptFallingEdge);
+	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptFallingEdge);
+
+	NVIC_EnableIRQ(PORTC_IRQn);
+	NVIC_SetPriority(PORTC_IRQn, 1);
+
+	NVIC_EnableIRQ(PORTA_IRQn);
+	NVIC_SetPriority(PORTA_IRQn, 1);
+
 	while(1) {
 
 		L1 = GPIO_PinRead(GPIOB, PIN2);
@@ -134,23 +141,22 @@ int main(void) {
     	C3 = GPIO_PinRead(GPIOD, PIN3);
     	C4 = GPIO_PinRead(GPIOD, PIN1);
     	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
+    	printf("State: %d\n", current_state);
     	if(g_Button2){
     		current_state = PERIOD;
-    		g_Button2 = false;
     	}
     	if(g_Button3){
     		current_state = AMPLITUDE;
-    		g_Button3 = false;
     	}
     	switch(current_state){
     	case START:
     		RED_RGB();
     		break;
     	case PERIOD:
-    		RED_RGB();
+    		GREEN_RGB();
     		break;
     	case AMPLITUDE:
-    		GREEN_RGB();
+    		BLUE_RGB();
     		break;
     	default:
     		break;
