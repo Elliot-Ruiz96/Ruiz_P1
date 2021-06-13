@@ -11,6 +11,10 @@
 
 uint8_t g_Button2 = 0;
 uint8_t g_Button3 = 0;
+uint8_t g_Column1 = 0;
+uint8_t g_Column2 = 0;
+uint8_t g_Column3 = 0;
+uint8_t g_Column4 = 0;
 
 gpio_pin_config_t sw_config = {
         kGPIO_DigitalInput,
@@ -27,25 +31,44 @@ gpio_pin_config_t line_config = {
         0,
     };
 
-void PORTA_IRQHandler(void)
-{
-
+void PORTA_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOA, 1U << PIN4);
     g_Button3 = true;
     SDK_ISR_EXIT_BARRIER;
 }
 
-void PORTC_IRQHandler(void)
-{
-
+void PORTC_IRQHandler(void){
     GPIO_PortClearInterruptFlags(GPIOC, 1U << PIN6);
     g_Button2 = true;
     SDK_ISR_EXIT_BARRIER;
 }
 
+void PORTC1_IRQHandler(void){
+    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN0);
+    g_Column1 = true;
+    SDK_ISR_EXIT_BARRIER;
+}
+
+void PORTC2_IRQHandler(void){
+    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN2);
+    g_Column2 = true;
+    SDK_ISR_EXIT_BARRIER;
+}
+
+void PORTC3_IRQHandler(void){
+    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN3);
+    g_Column3 = true;
+    SDK_ISR_EXIT_BARRIER;
+}
+void PORTC4_IRQHandler(void){
+    GPIO_PortClearInterruptFlags(GPIOD, 1U << PIN1);
+    g_Column4 = true;
+    SDK_ISR_EXIT_BARRIER;
+}
+
 int main(void) {
 
-	uint8_t L1, L2, L3, L4, C1, C2, C3, C4;
+	uint8_t L1, L2, L3, L4;
 
 	const port_pin_config_t sw_pin_config = {
 	    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
@@ -107,27 +130,53 @@ int main(void) {
 	NVIC_EnableIRQ(PORTC_IRQn);
 	NVIC_SetPriority(PORTC_IRQn, 1);
 
+	PORT_SetPinInterruptConfig(PORTD, PIN0, kPORT_InterruptFallingEdge);
+	NVIC_EnableIRQ(PORTD_IRQn);
+	NVIC_SetPriority(PORTD_IRQn, 2);
+
+	PORT_SetPinInterruptConfig(PORTD, PIN2, kPORT_InterruptFallingEdge);
+	NVIC_EnableIRQ(PORTD_IRQn);
+	NVIC_SetPriority(PORTD_IRQn, 2);
+
+	PORT_SetPinInterruptConfig(PORTD, PIN3, kPORT_InterruptFallingEdge);
+	NVIC_EnableIRQ(PORTD_IRQn);
+	NVIC_SetPriority(PORTD_IRQn, 2);
+
+	PORT_SetPinInterruptConfig(PORTD, PIN1, kPORT_InterruptFallingEdge);
+	NVIC_EnableIRQ(PORTD_IRQn);
+	NVIC_SetPriority(PORTD_IRQn, 2);
+
+
 	while(1) {
 
 		L1 = GPIO_PinRead(GPIOB, PIN2);
     	L2 = GPIO_PinRead(GPIOB, PIN3);
     	L3 = GPIO_PinRead(GPIOB, PIN10);
     	L4 = GPIO_PinRead(GPIOB, PIN11);
-    	C1 = GPIO_PinRead(GPIOD, PIN0);
-    	C2 = GPIO_PinRead(GPIOD, PIN2);
-    	C3 = GPIO_PinRead(GPIOD, PIN3);
-    	C4 = GPIO_PinRead(GPIOD, PIN1);
-    	Read_KeyPad(L1, L2, L3, L4, C1, C2, C3, C4);
-    	GREEN_RGB();
-    	if(g_Button2)
-    	{
+    	Read_KeyPad(L1, L2, L3, L4, g_Column1, g_Column2, g_Column3, g_Column4);
+    	printf("C1: %d \n", g_Column1);
+    	printf("C2: %d \n", g_Column2);
+    	printf("C3: %d \n", g_Column3);
+    	printf("C4: %d \n", g_Column4);
+    	printf("B2: %d \n", g_Button2);
+    	printf("B3: %d \n", g_Button3);
+    	if(g_Button2){
     		g_Button2 = false;
-    		RED_RGB();
     	}
-    	if(g_Button3)
-    	{
+    	if(g_Button3){
     		g_Button3 = false;
-    		BLUE_RGB();
+    	}
+    	if(g_Column1){
+    		g_Column1 = false;
+    	}
+    	if(g_Column2){
+    		g_Column2 = false;
+    	}
+    	if(g_Column3){
+    		g_Column3 = false;
+    	}
+    	if(g_Column4){
+    		g_Column4 = false;
     	}
     	SDK_DelayAtLeastUs(DELAY, CORE_FREQ);
     }
