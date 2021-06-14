@@ -33,16 +33,8 @@ void PORTC_IRQHandler(void){
 int main(void) {
 
 	uint8_t flag;
-	pit_config_t pitConfig;
-	uint32_t FREQ = 0;
 
-	PIT_GetDefaultConfig(&pitConfig);
-	PIT_Init(PIT, &pitConfig);
-	FREQ = CLOCK_GetFreq(kCLOCK_BusClk);
-	PIT_SetTimerPeriod(PIT, kPIT_Chnl_0, USEC_TO_COUNT(1000000U, FREQ));
-	PIT_EnableInterrupts(PIT, kPIT_Chnl_0, kPIT_TimerInterruptEnable);
-	EnableIRQ(PIT0_IRQn);
-	PIT_StartTimer(PIT, kPIT_Chnl_0);
+	PIT_Initialize();
 
 	GPIO_Config();
 
