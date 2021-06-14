@@ -10,4 +10,6 @@ void PIT0_IRQHandler(void);
 
 void PIT_Flag_Set_PIT(void);
 
+void PIT_Initialize();
+
 #endif /* PIT_H_ */

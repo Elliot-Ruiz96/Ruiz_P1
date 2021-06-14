@@ -1,10 +1,10 @@
 #include "Keyboard_Matrix.h"
 
+State_name_t1 current_line = FIRST;
+
 void Read_KeyPad(){
 
 	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4, flag1, flag2 = true;
-
-	State_name_t1 current_line = FIRST;
 
 	L1 = GPIO_PinRead(GPIOB, PIN2);
 	L2 = GPIO_PinRead(GPIOB, PIN3);
@@ -41,13 +41,15 @@ void Read_KeyPad(){
 						flag1 = false;
 						flag2 = false;
 					}
-					flag1 = false;
-					if(flag1 == false && flag2 == true){
+					if(flag1 == true && flag2 == true){
 						current_line = SECOND;
+						flag1 = false;
+						printf("Test1\n");
 					}
+					printf("Test2\n");
 				}
-				flag2 = false;
 				GPIO_PortClear(GPIOB, 1u << PIN2);
+				printf("Test3\n");
 			}
 		break;
 	case SECOND:
@@ -75,12 +77,14 @@ void Read_KeyPad(){
 				flag1 = false;
 				flag2 = false;
 			}
-			flag1 = false;
-			if(flag1 == false && flag2 == true){
+			if(flag1 == true && flag2 == true){
 				current_line = THIRD;
+				flag1 = false;
+				printf("Test4\n");
 			}
+			printf("Test5\n");
 		}
-		flag2 = false;
+		printf("Test6\n");
 		GPIO_PortClear(GPIOB, 1u << PIN3);
 		}
 		break;
@@ -109,12 +113,14 @@ void Read_KeyPad(){
 				flag1 = false;
 				flag2 = false;
 			}
-			flag1 = false;
-			if(flag1 == false && flag2 == true){
+			if(flag1 == true && flag2 == true){
 				current_line = FOURTH;
+				flag1 = false;
+				printf("Test7\n");
 			}
+			printf("Test8\n");
 		}
-		flag2 = false;
+		printf("Test9\n");
 		GPIO_PortClear(GPIOB, 1u << PIN10);
 		}
 		break;
@@ -143,13 +149,15 @@ void Read_KeyPad(){
 						flag1 = false;
 						flag2 = false;
 					}
-					flag1 = false;
-					if(flag1 == false && flag2 == true){
+					if(flag1 == true && flag2 == true){
 						current_line = FIRST;
+						flag1 = false;
+						printf("Test10\n");
 					}
+					printf("Test11\n");
 				}
-				flag2 = false;
-				GPIO_PortClear(GPIOB, 1u << PIN11);;
+				printf("Test12\n");
+				GPIO_PortClear(GPIOB, 1u << PIN11);
 				}
 		break;
 	}
