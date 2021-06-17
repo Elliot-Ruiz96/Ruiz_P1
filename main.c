@@ -54,6 +54,8 @@ int main(void) {
 			switch(current_state){
 				case START:
 					RED_RGB();
+					total = 4095;
+					DAC_Start(total);
 					if(g_Button2){
 						current_state = PERIOD;
 					}
