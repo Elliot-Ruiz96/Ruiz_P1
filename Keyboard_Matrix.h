@@ -5,6 +5,7 @@
 #include "fsl_gpio.h"
 #include "fsl_port.h"
 #include "PIT.h"
+#include "RGB.h"
 
 typedef enum {
 	FIRST,
