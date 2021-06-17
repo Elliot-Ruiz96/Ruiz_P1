@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "fsl_gpio.h"
+#include "fsl_port.h"
 #include "PIT.h"
 
 typedef enum {
@@ -20,6 +21,6 @@ typedef enum {
 #define PIN10		10u
 #define PIN11		11u
 
-void Read_KeyPad();
+int Read_KeyPad();
 
 #endif /* KEYBOARD_MATRIX_H_ */
