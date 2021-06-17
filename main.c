@@ -73,7 +73,7 @@ int main(void) {
 								current_state = EDIT;
 								flag = false;
 								Get_Num();
-								DAC_Start(total);
+								//PIT_Start(total);
 							}
 							PIT_Flag_Set_PIT();
 						}
@@ -90,7 +90,6 @@ int main(void) {
 								current_state = EDIT;
 								flag = false;
 								Get_Num();
-								printf("Total: %d\n", total);
 								DAC_Start(total);
 							}
 							PIT_Flag_Set_PIT();
