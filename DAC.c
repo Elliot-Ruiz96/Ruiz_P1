@@ -12,13 +12,11 @@ void DAC_Config(){
 
 void DAC_Start(value){
 	dacValue = value;
-    printf("dacValue: %d\n", dacValue);
-    if (dacValue > 0xFFFU)
+    if (dacValue > 4095)
     {
         printf("Valor fuera de rango\n");
     }
     DAC_SetBufferValue(DAC_BASEADDR, 0U, dacValue);
-    printf("DAC out: %d\n", dacValue);
     /*
      * The value in the first item would be converted. User can measure the output voltage from DAC_OUTx pin.
      */
