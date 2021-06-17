@@ -4,6 +4,10 @@ State_name_t1 current_line = FIRST;
 uint8_t dot = false;
 uint32_t input = 0, input2 = 0, total = 0;
 
+uint32_t Get_Num(){
+	return total;
+}
+
 void Read_KeyPad(){
 
 	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4, flag1, flag2 = true;
@@ -205,6 +209,6 @@ void Read_KeyPad(){
 				GPIO_PortClear(GPIOB, 1u << PIN11);
 				}
 		break;
-
 	}
+	Get_Num();
 }
