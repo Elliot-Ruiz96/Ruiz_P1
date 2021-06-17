@@ -65,7 +65,6 @@ int Read_KeyPad(){
 					}
 				}
 				GPIO_PortClear(GPIOB, 1u << PIN2);
-				printf("Linea 2:\n");
 			}
 		break;
 	case SECOND:
@@ -115,7 +114,6 @@ int Read_KeyPad(){
 			}
 		}
 		GPIO_PortClear(GPIOB, 1u << PIN3);
-		printf("Linea 3:\n");
 		}
 		break;
 	case THIRD:
@@ -165,7 +163,6 @@ int Read_KeyPad(){
 			}
 		}
 		GPIO_PortClear(GPIOB, 1u << PIN10);
-		printf("Linea 4:\n");
 		}
 		break;
 	case FOURTH:
@@ -206,9 +203,9 @@ int Read_KeyPad(){
 					}
 				}
 				GPIO_PortClear(GPIOB, 1u << PIN11);
-				printf("Linea 1:\n");
 				}
 		break;
+
 	}
 	return total;
 }
