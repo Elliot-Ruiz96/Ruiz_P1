@@ -14,4 +14,6 @@ void PIT1_IRQHandler(void);
 void PIT_Flag_Set_PIT1(void);
 void PIT1_Initialize();
 
+void PIT_Start(total);
+
 #endif /* PIT_H_ */
