@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "fsl_dac.h"
 #include "Config.h"
+#include "DAC.h"
 #include "Keyboard_Matrix.h"
 #include "PIT.h"
 #include "RGB.h"
@@ -33,10 +33,11 @@ void PORTC_IRQHandler(void){
 int main(void) {
 
 	uint8_t flag;
+	extern uint32_t total;
 
-	PIT_Initialize();
-
+	DAC_Config();
 	GPIO_Config();
+	PIT_Initialize();
 
 	PORT_SetPinInterruptConfig(PORTC, PIN6, kPORT_InterruptFallingEdge);
 	PORT_SetPinInterruptConfig(PORTA, PIN4, kPORT_InterruptFallingEdge);
@@ -70,6 +71,7 @@ int main(void) {
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
+								DAC_Start(total);
 							}
 							PIT_Flag_Set_PIT();
 						}
@@ -85,6 +87,7 @@ int main(void) {
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
+								DAC_Start(total);
 							}
 							PIT_Flag_Set_PIT();
 						}
@@ -93,10 +96,12 @@ int main(void) {
 				case EDIT:
 					g_Button2 = false;
 					g_Button3 = false;
+					total = 0;
 					flag = true;
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
 							PURPLE_RGB();
+							printf("Numero: %d\n", total);
 							if(g_Button2 == 1){
 								current_state = PERIOD;
 								flag = false;
