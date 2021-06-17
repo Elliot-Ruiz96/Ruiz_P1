@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "fsl_dac.h"
 #include "Config.h"
+#include "DAC.h"
 #include "Keyboard_Matrix.h"
 #include "PIT.h"
 #include "RGB.h"
@@ -33,6 +33,7 @@ void PORTC_IRQHandler(void){
 int main(void) {
 
 	uint8_t flag;
+	extern uint32_t total;
 
 	PIT_Initialize();
 
@@ -97,6 +98,7 @@ int main(void) {
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
 							PURPLE_RGB();
+							printf("Numero: %d\n", total);
 							if(g_Button2 == 1){
 								current_state = PERIOD;
 								flag = false;
