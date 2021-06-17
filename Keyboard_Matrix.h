@@ -21,6 +21,6 @@ typedef enum {
 #define PIN10		10u
 #define PIN11		11u
 
-int Read_KeyPad();
+void Read_KeyPad();
 
 #endif /* KEYBOARD_MATRIX_H_ */
