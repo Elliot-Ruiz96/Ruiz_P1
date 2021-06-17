@@ -101,7 +101,6 @@ int main(void) {
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
 							PURPLE_RGB();
-							printf("Numero: %d\n", total);
 							if(g_Button2 == 1){
 								current_state = PERIOD;
 								flag = false;
