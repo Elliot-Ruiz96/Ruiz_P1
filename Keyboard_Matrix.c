@@ -4,7 +4,7 @@ State_name_t1 current_line = FIRST;
 uint8_t dot = false;
 uint32_t input = 0, input2 = 0, total = 0;
 
-int Read_KeyPad(){
+void Read_KeyPad(){
 
 	uint8_t L1, L2, L3, L4, C1, C2, C3 ,C4, flag1, flag2 = true;
 
@@ -207,5 +207,4 @@ int Read_KeyPad(){
 		break;
 
 	}
-	return total;
 }
