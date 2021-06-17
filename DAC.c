@@ -11,10 +11,13 @@ void DAC_Config(){
 }
 
 void DAC_Start(value){
-	dacValue = value;
-    if (dacValue > 4095)
-    {
-        printf("Valor fuera de rango\n");
-    }
-    DAC_SetBufferValue(DAC_BASEADDR, 0U, dacValue);
+	if(PIT_Flag_get_PIT1() == true){
+		dacValue = value;
+	    if (dacValue > 4095)
+	    {
+	        printf("Valor fuera de rango\n");
+	    }
+	    DAC_SetBufferValue(DAC_BASEADDR, 0U, dacValue);
+	}
+	PIT_Flag_Set_PIT1();
 }
