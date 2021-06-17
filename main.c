@@ -73,7 +73,7 @@ int main(void) {
 								current_state = EDIT;
 								flag = false;
 								Get_Num();
-								//PIT_Start(total);
+								PIT_Start(total);
 							}
 							PIT_Flag_Set_PIT();
 						}
@@ -84,7 +84,6 @@ int main(void) {
 					flag = true;
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
-							BLUE_RGB();
 							Read_KeyPad();
 							if(g_Button2 == 1){
 								current_state = EDIT;
