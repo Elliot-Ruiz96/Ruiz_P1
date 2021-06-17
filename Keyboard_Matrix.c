@@ -62,15 +62,9 @@ int Read_KeyPad(){
 					if(flag1 == true && flag2 == true){
 						current_line = SECOND;
 						flag1 = false;
-						printf("Test1\n");
 					}
-					printf("Test2\n");
 				}
 				GPIO_PortClear(GPIOB, 1u << PIN2);
-<<<<<<< Updated upstream
-				printf("Test3\n");
-=======
->>>>>>> Stashed changes
 			}
 		break;
 	case SECOND:
@@ -117,11 +111,8 @@ int Read_KeyPad(){
 			if(flag1 == true && flag2 == true){
 				current_line = THIRD;
 				flag1 = false;
-				printf("Test4\n");
 			}
-			printf("Test5\n");
 		}
-		printf("Test6\n");
 		GPIO_PortClear(GPIOB, 1u << PIN3);
 		}
 		break;
@@ -169,11 +160,8 @@ int Read_KeyPad(){
 			if(flag1 == true && flag2 == true){
 				current_line = FOURTH;
 				flag1 = false;
-				printf("Test7\n");
 			}
-			printf("Test8\n");
 		}
-		printf("Test9\n");
 		GPIO_PortClear(GPIOB, 1u << PIN10);
 		}
 		break;
@@ -212,11 +200,8 @@ int Read_KeyPad(){
 					if(flag1 == true && flag2 == true){
 						current_line = FIRST;
 						flag1 = false;
-						printf("Test10\n");
 					}
-					printf("Test11\n");
 				}
-				printf("Test12\n");
 				GPIO_PortClear(GPIOB, 1u << PIN11);
 				}
 		break;
