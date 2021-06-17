@@ -27,9 +27,8 @@ void Read_KeyPad(){
 				GPIO_PortSet(GPIOB, 1u << PIN2);
 				flag1 = true;
 				while(flag1 == true){
-					printf("Linea 1:\n");
+					YELLOW_RGB();
 					if(C1 == 0){
-						printf("1\n");
 						flag1 = false;
 						flag2 = false;
 						input = (input * 10) + 1;
@@ -39,7 +38,6 @@ void Read_KeyPad(){
 						total = input + input2;
 					}
 					else if (C2 == 0){
-						printf("2\n");
 						flag1 = false;
 						flag2 = false;
 						input = (input * 10) + 2;
@@ -49,7 +47,6 @@ void Read_KeyPad(){
 						total = input + input2;
 					}
 					else if (C3 == 0){
-						printf("3\n");
 						flag1 = false;
 						flag2 = false;
 						input = (input * 10) + 3;
@@ -59,7 +56,6 @@ void Read_KeyPad(){
 						total = input + input2;
 					}
 					else if (C4 == 0){
-						printf("A\n");
 						flag1 = false;
 						flag2 = false;
 					}
@@ -76,9 +72,8 @@ void Read_KeyPad(){
 		GPIO_PortSet(GPIOB, 1u << PIN3);
 		flag1 = true;
 		while(flag1 == true){
-			printf("Linea 2:\n");
+			LIGHTBLUE_RGB();
 			if(C1 == 0){
-				printf("4\n");
 				flag1 = false;
 				flag2 = false;
 				input = (input * 10) + 4;
@@ -88,7 +83,6 @@ void Read_KeyPad(){
 				total = input + input2;
 			}
 			else if (C2 == 0){
-				printf("5\n");
 				flag1 = false;
 				flag2 = false;
 				input = (input * 10) + 5;
@@ -98,7 +92,6 @@ void Read_KeyPad(){
 				total = input + input2;
 			}
 			else if (C3 == 0){
-				printf("6\n");
 				flag1 = false;
 				flag2 = false;
 				input = (input * 10) + 6;
@@ -108,7 +101,6 @@ void Read_KeyPad(){
 				total = input + input2;
 			}
 			else if (C4 == 0){
-				printf("B\n");
 				flag1 = false;
 				flag2 = false;
 			}
@@ -125,9 +117,8 @@ void Read_KeyPad(){
 		GPIO_PortSet(GPIOB, 1u << PIN10);
 		flag1 = true;
 		while(flag1 == true){
-			printf("Linea 3:\n");
+			WHITE_RGB();
 			if(C1 == 0){
-				printf("7\n");
 				flag1 = false;
 				flag2 = false;
 				input = (input * 10) + 7;
@@ -137,7 +128,6 @@ void Read_KeyPad(){
 				total = input + input2;
 			}
 			else if (C2 == 0){
-				printf("8\n");
 				flag1 = false;
 				flag2 = false;
 				input = (input * 10) + 8;
@@ -147,7 +137,6 @@ void Read_KeyPad(){
 				total = input + input2;
 			}
 			else if (C3 == 0){
-				printf("9\n");
 				flag1 = false;
 				flag2 = false;
 				input = (input * 10) + 9;
@@ -157,7 +146,6 @@ void Read_KeyPad(){
 				total = input + input2;
 			}
 			else if (C4 == 0){
-				printf("C\n");
 				flag1 = false;
 				flag2 = false;
 			}
@@ -174,15 +162,13 @@ void Read_KeyPad(){
 				GPIO_PortSet(GPIOB, 1u << PIN11);
 				flag1 = true;
 				while(flag1 == true){
-					printf("Linea 4:\n");
+					GREEN_RGB();
 					if(C1 == 0){
-						printf("*\n");
 						flag1 = false;
 						flag2 = false;
 						dot = true;
 					}
 					else if (C2 == 0){
-						printf("0\n");
 						flag1 = false;
 						flag2 = false;
 						input = input * 10;
@@ -192,12 +178,10 @@ void Read_KeyPad(){
 						total = input + input2;
 					}
 					else if (C3 == 0){
-						printf("#\n");
 						flag1 = false;
 						flag2 = false;
 					}
 					else if (C4 == 0){
-						printf("D\n");
 						flag1 = false;
 						flag2 = false;
 					}
@@ -210,5 +194,4 @@ void Read_KeyPad(){
 				}
 		break;
 	}
-	Get_Num();
 }
