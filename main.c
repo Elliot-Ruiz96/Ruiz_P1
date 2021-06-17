@@ -66,11 +66,11 @@ int main(void) {
 					flag = true;
 					while(flag == true){
 						if(PIT_Flag_get_PIT() == true){
-							GREEN_RGB();
 							Read_KeyPad();
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
+								Get_Num();
 								DAC_Start(total);
 							}
 							PIT_Flag_Set_PIT();
@@ -87,6 +87,8 @@ int main(void) {
 							if(g_Button2 == 1){
 								current_state = EDIT;
 								flag = false;
+								Get_Num();
+								printf("Total: %d\n", total);
 								DAC_Start(total);
 							}
 							PIT_Flag_Set_PIT();
