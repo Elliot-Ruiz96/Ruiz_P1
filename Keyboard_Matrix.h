@@ -23,4 +23,6 @@ typedef enum {
 
 void Read_KeyPad();
 
+uint32_t Get_Num();
+
 #endif /* KEYBOARD_MATRIX_H_ */
